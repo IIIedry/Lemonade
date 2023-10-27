@@ -68,7 +68,20 @@ fun LemonApp() {
                 }
             }
             2 -> {
-
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ){
+                    Text(text = stringResource(R.string.lemon_squeeze))
+                    Spacer(modifier = Modifier.height(32
+                        .dp))
+                    Image(
+                        painter = painterResource(R.drawable.lemon_squeeze),
+                        contentDescription = stringResource(R.string.lemon_content_description),
+                        modifier = Modifier.wrapContentSize()
+                    )
+                }
             }
         }
     }
