@@ -77,6 +77,16 @@ fun LemonApp() {
                     }
                 )
             }
+            3 -> {
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.lemon_drink,
+                    drawableResourceId = R.drawable.lemon_drink,
+                    contentDescriptionResourceId = R.string.lemonade_content_description,
+                    onImageClick = {
+                        currentStep = 4
+                    }
+                )
+            }
         }
     }
 }
