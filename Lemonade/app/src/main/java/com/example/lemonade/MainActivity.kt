@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -41,50 +43,34 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonApp() {
     var currentStep by remember { mutableStateOf(1) }
+    var squeezeCount by remember { mutableStateOf(0) }
 
-    // A surface container using the 'background' color from the theme
     Surface(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .background(MaterialTheme.colorScheme.tertiaryContainer),
         color = MaterialTheme.colorScheme.background
     ) {
         when (currentStep) {
             1 -> {
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
-                ){
-                    Text(text = stringResource(R.string.lemon_select))
-                    Spacer(modifier = Modifier.height(32.dp))
-                    Image(
-                        painter = painterResource(R.drawable.lemon_tree),
-                        contentDescription = stringResource(R.string.lemon_tree_content_description),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .clickable {
-                                currentStep = 2
-                            }
-                    )
-                }
-            }
-            2 -> {
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
-                ){
-                    Text(text = stringResource(R.string.lemon_squeeze))
-                    Spacer(modifier = Modifier.height(32
-                        .dp))
-                    Image(
-                        painter = painterResource(R.drawable.lemon_squeeze),
-                        contentDescription = stringResource(R.string.lemon_content_description),
-                        modifier = Modifier.wrapContentSize()
-                    )
-                }
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.lemon_select,
+                    drawableResourceId = R.drawable.lemon_tree,
+                    contentDescriptionResourceId = R.string.lemon_tree_content_description,
+                    onImageClick = {
+                        currentStep = 2
+                        squeezeCount = (2..4).random()
+                    }
+                )
             }
         }
     }
+}
+
+@Composable
+fun LemonTextAndImage(textLabelResourceId: Int, drawableResourceId: Int, contentDescriptionResourceId: Int, onImageClick: () -> Unit) {
+
 }
 
 @Preview(showBackground = true)
