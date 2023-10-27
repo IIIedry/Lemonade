@@ -64,6 +64,19 @@ fun LemonApp() {
                     }
                 )
             }
+            2 -> {
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.lemon_squeeze,
+                    drawableResourceId = R.drawable.lemon_squeeze,
+                    contentDescriptionResourceId = R.string.lemon_content_description,
+                    onImageClick = {
+                        squeezeCount--
+                        if (squeezeCount == 0) {
+                            currentStep = 3
+                        }
+                    }
+                )
+            }
         }
     }
 }
